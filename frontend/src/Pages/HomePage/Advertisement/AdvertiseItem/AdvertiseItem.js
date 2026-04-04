@@ -2,31 +2,48 @@ import { useNavigate } from "react-router-dom";
 
 const AdvertiseItem = ({ product }) => {
   const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col shadow-xl rounded">
-      <div>
+    <div className="flex flex-col rounded-xl overflow-hidden shadow-lg 
+                    border border-gray-400 
+                    hover:border-orange-400 hover:ring-1 hover:ring-orange-400 
+                    hover:shadow-2xl hover:-translate-y-1 
+                    transition-all duration-300 bg-gray-800">
+
+      {/* Image */}
+      <div className="overflow-hidden">
         <img
           alt=""
-          className="object-cover w-full h-52 dark:bg-gray-500"
+          className="object-cover w-full h-52 hover:scale-105 transition duration-300"
           src={product.img}
         />
       </div>
-      <div className="flex flex-col flex-1 p-6">
-        <p className="text-lg font-bold tracking-wider uppercase hover:underline dark:text-violet-400">
+
+      {/* Content (SOFT CONTRAST) */}
+      <div className="flex flex-col flex-1 p-5 bg-gray-700">
+        
+        {/* Price */}
+        <p className="text-xl font-bold text-yellow-400">
           ৳{product.resale_Price}
         </p>
-        <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
+
+        {/* Title */}
+        <h3 className="flex-1 py-2 text-lg font-semibold text-white">
           {product.name}
         </h3>
-        <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
+
+        {/* Meta */}
+        <div className="flex justify-between text-xs text-gray-300 mt-2">
           <span>{product.time_of_post}</span>
           <span>{Math.floor(Math.random() * 5000)} views</span>
         </div>
+
+        {/* Button */}
         <button
           onClick={() => navigate(`/product/${product._id}`)}
-          className="btn uppercase bg-orange-400 hover:bg-orange-500 mt-4 border-none text-white"
+          className="mt-4 bg-orange-400 hover:bg-orange-500 text-white py-2 rounded-md font-semibold transition"
         >
-          Book Now
+          BOOK NOW
         </button>
       </div>
     </div>
