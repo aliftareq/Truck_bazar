@@ -6,6 +6,7 @@ import BookingModal from "../BookingModal/BookingModal";
 
 const ProductDetails = () => {
   const product = useLoaderData();
+  console.log("product details data:", product);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const {

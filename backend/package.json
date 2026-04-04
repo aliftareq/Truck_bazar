@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "\"This is truck-bazar-server file\"",
   "main": "index.js",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",

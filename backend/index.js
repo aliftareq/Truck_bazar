@@ -156,6 +156,17 @@ app.get("/product/reportedItems", verifyJwt, verifyAdmin, async (req, res) => {
   }
 });
 
+app.get("/product/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = { _id: ObjectId(id) };
+    const product = await ProductsCollection.findOne(query);
+    res.send(product);
+  } catch (error) {
+    res.send({ message: error.message });
+  }
+});
+
 //api for deleting products
 app.delete("/deleteproduct/:id", async (req, res) => {
   try {
