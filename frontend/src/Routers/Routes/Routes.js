@@ -91,15 +91,31 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard",
+        index: true,
+        loader: async () => {
+          const res = await fetch(
+            "https://truckbazar-server-side.vercel.app/dashboard-stats",
+            {
+              headers: {
+                authorization: `bearer ${localStorage.getItem("user-token")}`,
+              },
+            },
+          );
+
+          if (!res.ok) {
+            return {};
+          }
+
+          return res.json();
+        },
         element: <DashBoard></DashBoard>,
       },
       {
-        path: "/dashboard/myorders",
+        path: "myorders",
         element: <MyOrders></MyOrders>,
       },
       {
-        path: "/dashboard/payment/:id",
+        path: "payment/:id",
         loader: ({ params }) =>
           fetch(
             `https://truckbazar-server-side.vercel.app/booking/${params.id}`,
@@ -107,7 +123,7 @@ export const router = createBrowserRouter([
         element: <Payment></Payment>,
       },
       {
-        path: "/dashboard/myproducts",
+        path: "myproducts",
         element: (
           <SellerRoute>
             <MyProducts></MyProducts>
@@ -115,7 +131,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/add-products",
+        path: "add-products",
         element: (
           <SellerRoute>
             <AddProducts></AddProducts>
@@ -123,7 +139,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/my-buyers",
+        path: "my-buyers",
         element: (
           <SellerRoute>
             <MyBuyers></MyBuyers>
@@ -131,7 +147,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/all-sellers",
+        path: "all-sellers",
         element: (
           <AdminRoute>
             <AllSellers></AllSellers>
@@ -139,7 +155,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/all-buyers",
+        path: "all-buyers",
         element: (
           <AdminRoute>
             <AllBuyers></AllBuyers>
@@ -147,7 +163,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/all-admin",
+        path: "all-admin",
         element: (
           <AdminRoute>
             <Alladmin></Alladmin>
@@ -155,7 +171,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/reported-items",
+        path: "reported-items",
         element: (
           <AdminRoute>
             <ReportedItems></ReportedItems>

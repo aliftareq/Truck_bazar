@@ -269,6 +269,46 @@ app.get("/admin", verifyJwt, verifyAdmin, async (req, res) => {
   }
 });
 
+app.get("/dashboard-stats", verifyJwt, verifyAdmin, async (req, res) => {
+  try {
+    const totalProducts = await ProductsCollection.countDocuments({});
+    const soldProducts = await ProductsCollection.countDocuments({
+      paid: true,
+    });
+    const reportedProducts = await ProductsCollection.countDocuments({
+      reported: true,
+    });
+
+    const totalUsers = await usersCollection.countDocuments({});
+    const totalSellers = await usersCollection.countDocuments({
+      role: "Seller",
+    });
+    const totalBuyers = await usersCollection.countDocuments({ role: "Buyer" });
+    const totalAdmins = await usersCollection.countDocuments({ role: "admin" });
+    const verifiedUsers = await usersCollection.countDocuments({
+      seller_verification: true,
+    });
+
+    const totalBookings = await BookingsCollection.countDocuments({});
+    const totalPayments = await PaymentsCollection.countDocuments({});
+
+    res.send({
+      totalProducts,
+      soldProducts,
+      reportedProducts,
+      totalUsers,
+      totalSellers,
+      totalBuyers,
+      totalAdmins,
+      verifiedUsers,
+      totalBookings,
+      totalPayments,
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
 //-------------------------------------------//
 
 //-----------------------api's for update and delete operation----------------------//
