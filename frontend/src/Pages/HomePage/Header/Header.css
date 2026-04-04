@@ -1,0 +1,6 @@
+.BgImg {
+    background-image: url("../../../Assets/slider-images/black-bg.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
