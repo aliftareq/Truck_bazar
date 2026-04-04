@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 import banner from '../../../Assets/images/advertisementBanner.jpg'
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 import AdvertiseItem from './AdvertiseItem/AdvertiseItem';

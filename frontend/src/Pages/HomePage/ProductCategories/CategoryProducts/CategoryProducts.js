@@ -1,41 +1,33 @@
-import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
-import BookingModal from '../BookingModal/BookingModal';
-import SingelProduct from '../SingelProduct/SingelProduct';
+import React from "react";
+import { useLoaderData } from "react-router-dom";
+import SingelProduct from "../SingelProduct/SingelProduct";
 
 const CategoryProducts = () => {
-    //states
-    const [product, setProduct] = useState({})
+  const products = useLoaderData();
 
-    //loading data
-    const data = useLoaderData()
-    const products = data
-    console.log(products);
-    return (
-        <section className='bg-whtie my-10'>
-            <div className=''>
-                <h1 className='text-black text-lg lg:text-3xl text-center mt-5 font-bold'>
-                    Available Products for {data[0]?.CategoryName ? <span className='text-3xl lg:text-5xl text-amber-400 uppercase'>{data[0]?.CategoryName}</span> : ''}  Category
-                </h1>
-            </div>
-            <div className='mx-10 my-5 lg:my-10'>
-                {
-                    products.map(product => <SingelProduct
-                        key={product._id}
-                        product={product}
-                        setProduct={setProduct}
-                    ></SingelProduct>)
-                }
-            </div>
-            {
-                product &&
-                <BookingModal
-                    product={product}
-                    setProduct={setProduct}
-                ></BookingModal>
-            }
-        </section>
-    );
+  return (
+    <section className="bg-white my-10">
+      <div>
+        <h1 className="text-black text-lg lg:text-3xl text-center mt-5 font-bold">
+          Available Products for{" "}
+          {products[0]?.CategoryName ? (
+            <span className="text-3xl lg:text-5xl text-amber-400 uppercase">
+              {products[0]?.CategoryName}
+            </span>
+          ) : (
+            ""
+          )}{" "}
+          Category
+        </h1>
+      </div>
+
+      <div className="mx-5 lg:mx-10 my-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {products.map((product) => (
+          <SingelProduct key={product._id} product={product} />
+        ))}
+      </div>
+    </section>
+  );
 };
 
 export default CategoryProducts;

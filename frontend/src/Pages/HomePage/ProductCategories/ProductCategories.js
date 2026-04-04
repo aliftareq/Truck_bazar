@@ -1,4 +1,3 @@
-import React from 'react';
 import pickup from '../../../Assets/truck-Images/pick-up.png'
 import truck from '../../../Assets/truck-Images/trucks.png'
 import trailor from '../../../Assets/truck-Images/trailor.png'
