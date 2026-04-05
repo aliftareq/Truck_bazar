@@ -217,10 +217,20 @@ app.get("/advertiseProducts", async (req, res) => {
 app.post("/users", async (req, res) => {
   try {
     const user = req.body;
+
+    const existingUser = await usersCollection.findOne({ email: user.email });
+
+    if (existingUser) {
+      return res.send({
+        acknowledged: true,
+        message: "User already exists",
+      });
+    }
+
     const result = await usersCollection.insertOne(user);
     res.send(result);
   } catch (error) {
-    res.send(error.message);
+    res.status(500).send({ message: error.message });
   }
 });
 
